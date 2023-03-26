@@ -31,15 +31,19 @@ jobs:
         with:
           script: |
             const labels = ${github.event.pull_request.labels}
+            let cnt = 0
             for (const label of labels) {
-              if ("${label.name}".includes " Approved") {
-                github.rest.issues.addLabels({
-                  issue_number: ${{github.event.pull_request.number}},
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  labels: ["ALREADY REVIEWED"]
-                })
+              if (label.name.include(" Approved")) {
+                cnt++
               }
+            }
+            if (cnt > 1) {
+              github.rest.issues.addLabels({
+                issue_number: ${github.event.pull_request.number},
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                labels: ["ALREADY REVIEWED"]
+              })
             }
 #            github.rest.issues.addLabels({
 #              issue_number: ${{github.event.pull_request.number}},
