@@ -9,7 +9,7 @@ jobs:
     if: github.event.review.state == 'approved'
     runs-on: ubuntu-latest
     permissions:
-      pull-requests: write
+      pull-requests: read|write
     steps:
       - name: Dump GitHub event
         env:
