@@ -16,8 +16,11 @@ jobs:
           GITHUB_REVIEW_CONTEXT: ${{ toJson(github.event.review) }}
           GITHUB_PR_CONTEXT: ${{ toJson(github.event.pull_request) }}
         run: |
-          echo "GITHUB_REVIEW_CONTEXT"
-          echo "GITHUB_PR_CONTEXT"
+          echo GITHUB_REVIEW_CONTEXT
+          echo GITHUB_PR_CONTEXT
+          echo github.event.review.user.name
+          echo context.repo.owner
+          echo context.repo.repo
 #      - uses: actions/github-script@v6
 #        with:
 #          script: |
