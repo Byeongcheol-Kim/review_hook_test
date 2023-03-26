@@ -13,9 +13,11 @@ jobs:
     steps:
       - name: Dump GitHub event
         env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
+          GITHUB_REVIEW_CONTEXT: ${{ toJson(github.event.review) }}
+          GITHUB_PR_CONTEXT: ${{ toJson(github.event.pull_request) }}
         run: |
-          echo "$GITHUB_CONTEXT"
+          echo "GITHUB_REVIEW_CONTEXT"
+          echo "GITHUB_PR_CONTEXT"
 #      - uses: actions/github-script@v6
 #        with:
 #          script: |
