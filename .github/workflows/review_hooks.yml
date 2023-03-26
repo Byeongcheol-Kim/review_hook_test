@@ -11,6 +11,11 @@ jobs:
     permissions:
       pull-requests: write
     steps:
+      - name: Dump GitHub event
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: |
+          echo "$GITHUB_CONTEXT"
       - uses: actions/github-script@v6
         with:
           script: |
