@@ -28,9 +28,11 @@ jobs:
           echo "$GITHUB_PR_CONTEXT"
       - uses: actions/github-script@v6
         name: Add Already Approved Label
+        env:
+          GITHUB_PR_CONTEXT: ${{ toJson(github.event.pull_request) }}
         with:
           script: |
-            const labels = github.event.pull_request.labels
+            const labels = context.payload.pull_request.labels
             let cnt = 0
             for (const label of labels) {
               if (label.name.include(" Approved")) {
