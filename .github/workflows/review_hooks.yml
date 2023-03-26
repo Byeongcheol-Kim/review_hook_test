@@ -35,8 +35,8 @@ jobs:
             console.log(labels)
             for (const label of labels) {
               console.log(label)
-              console.log("${label.name}".includes(" Approved"))
-              if ("${label.name}".includes(" Approved")) {
+              console.log("label.name".includes(" Approved"))
+              if (label.name.includes(" Approved")) {
                 cnt++
               }
             }
