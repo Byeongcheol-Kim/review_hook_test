@@ -20,7 +20,6 @@ jobs:
               repo: context.repo.repo,
               labels: ["${{github.event.review.user.login}} Approved"]
             })
-            - uses: actions/github-script@v6
       - name: Dump GitHub event
         env:
           GITHUB_PR_CONTEXT: ${{ toJson(github.event.pull_request) }}
