@@ -11,13 +11,6 @@ jobs:
     permissions:
       pull-requests: write
     steps:
-#      - name: Dump GitHub event
-#        env:
-#          GITHUB_REVIEW_CONTEXT: ${{ toJson(github.event.review.user.login) }}
-#          GITHUB_PR_CONTEXT: ${{ toJson(github.event.pull_request.number) }}
-#        run: |
-#          echo "$GITHUB_REVIEW_CONTEXT"
-#          echo "$GITHUB_PR_CONTEXT"
       - uses: actions/github-script@v6
         with:
           script: |
@@ -27,6 +20,12 @@ jobs:
               repo: context.repo.repo,
               labels: ["${{github.event.review.user.login}} Approved"]
             })
+            - uses: actions/github-script@v6
+      - name: Dump GitHub event
+        env:
+          GITHUB_PR_CONTEXT: ${{ toJson(github.event.pull_request) }}
+        run: |
+          echo "$GITHUB_PR_CONTEXT"
 
 
 # https://stackoverflow.com/questions/68459601/can-we-add-labels-to-a-pull-request-while-creation-using-rest-api
