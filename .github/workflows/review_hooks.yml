@@ -30,7 +30,7 @@ jobs:
         name: Add Already Approved Label
         with:
           script: |
-            const labels = ${github.event.pull_request.labels}
+            const labels = github.event.pull_request.labels
             let cnt = 0
             for (const label of labels) {
               if (label.name.include(" Approved")) {
@@ -39,7 +39,7 @@ jobs:
             }
             if (cnt > 1) {
               github.rest.issues.addLabels({
-                issue_number: ${github.event.pull_request.number},
+                issue_number: ${{github.event.pull_request.number}},
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 labels: ["ALREADY REVIEWED"]
