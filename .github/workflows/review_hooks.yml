@@ -32,6 +32,7 @@ jobs:
           script: |
             const labels = context.payload.pull_request.labels
             const cnt = 0
+            console.log(labels)
             for (const label of labels) {
               if ("${label.name}".includes(" Approved")) {
                 cnt++
