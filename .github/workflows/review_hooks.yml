@@ -21,24 +21,23 @@ jobs:
               repo: context.repo.repo,
               labels: ["${{github.event.review.user.login}} Approved"]
             })
-      - name: Dump GitHub event
-        env:
-          GITHUB_PR_CONTEXT: ${{ toJson(github.event.pull_request) }}
-        run: |
-          echo "$GITHUB_PR_CONTEXT"
+#      - name: Dump GitHub event
+#        env:
+#          GITHUB_PR_CONTEXT: ${{ toJson(github.event.pull_request) }}
+#        run: |
+#          echo "$GITHUB_PR_CONTEXT"
       - uses: actions/github-script@v6
         name: Add Already Approved Label
-        env:
-          GITHUB_PR_CONTEXT: ${{ toJson(github.event.pull_request) }}
         with:
           script: |
             const labels = context.payload.pull_request.labels
-            let cnt = 0
+            const cnt = 0
             for (const label of labels) {
               if ("${label.name}".includes(" Approved")) {
                 cnt++
               }
             }
+            console.log("cnt: " + cnt)
             if (cnt > 1) {
               github.rest.issues.addLabels({
                 issue_number: ${{github.event.pull_request.number}},
